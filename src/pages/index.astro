@@ -1,17 +1,560 @@
 ---
+import Layout from '../layouts/Layout.astro';
 
+const featuredArticles = [
+  {
+    title: "Designing Premium Dark Modes: Lessons in HSL Contrast & Glows",
+    excerpt: "Explore how to use HSL colors to craft harmonious dark modes that feel premium, legible, and visual-first.",
+    date: "July 5, 2026",
+    readTime: "5 min read",
+    tag: "Design System"
+  },
+  {
+    title: "The Future of Web Performance: Astro vs. Traditional Frameworks",
+    excerpt: "An in-depth analysis of island architecture and zero-JS-by-default, and why it is transforming the modern web.",
+    date: "June 28, 2026",
+    readTime: "8 min read",
+    tag: "Performance"
+  },
+  {
+    title: "Building Fluid User Interfaces with CSS Variables & Grids",
+    excerpt: "Learn how dynamic CSS layouts and native variables can replace heavy CSS-in-JS runtimes without sacrificing power.",
+    date: "May 15, 2026",
+    readTime: "6 min read",
+    tag: "CSS & Web"
+  }
+];
+
+const featuredProjects = [
+  {
+    title: "Aether UI",
+    description: "A sleek, accessible component library built with design tokens and fluid animations.",
+    tech: ["TypeScript", "Astro", "Vanilla CSS"],
+    link: "#",
+    badge: "Featured"
+  },
+  {
+    title: "Nova Analytics",
+    description: "Real-time developer telemetry dashboard featuring advanced glassmorphic UI cards.",
+    tech: ["React", "D3.js", "WebSockets"],
+    link: "#",
+    badge: "Web App"
+  },
+  {
+    title: "Synapse DB",
+    description: "Distributed, edge-optimized serverless database adapter for ultra-low latency queries.",
+    tech: ["Go", "WebAssembly", "Edge"],
+    link: "#",
+    badge: "Backend"
+  }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <!-- Hero Section -->
+  <section class="hero fade-in">
+    <div class="container hero-container">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-text">Available for select client work</span>
+      </div>
+      <h1 class="hero-title">
+        Crafting state-of-the-art <span class="gradient-text">web experiences</span> that feel alive.
+      </h1>
+      <p class="hero-description">
+        I'm a digital architect and writer building highly polished web applications, exploring interactive animations, and designing design systems.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">Explore Projects</a>
+        <a href="#articles" class="btn btn-secondary">Read Articles</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Core Highlights / Skills -->
+  <section id="about" class="highlights container">
+    <div class="section-header">
+      <span class="subtitle">Focus Areas</span>
+      <h2>Core Specialties</h2>
+    </div>
+    <div class="highlights-grid">
+      <div class="highlight-card">
+        <div class="card-icon icon-purple">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122l9.37-9.37M9.53 16.122a3 3 0 10-4.243-4.243m4.242 4.242a3 3 0 11-4.243-4.243m9.37-9.37a3 3 0 11-4.243-4.243m4.242 4.242a3 3 0 10-4.243-4.243M12 9.75v-.75a.75.75 0 00-1.5 0v.75m0 3v.75a.75.75 0 001.5 0v-.75m-2.25-1.5h-.75a.75.75 0 000 1.5h.75m3 0h.75a.75.75 0 000-1.5h-.75" />
+          </svg>
+        </div>
+        <h3>Creative Interface Design</h3>
+        <p>Designing modern, interactive, and visually stunning layouts focused on animations, micro-interactions, and premium styling.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="card-icon icon-indigo">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14.25 9.75L16.5 12l-2.25 2.25m-4.5 0L7.5 12l2.25-2.25M6 20.25h12A2.25 2.25 0 0020.25 18V6A2.25 2.25 0 0018 3.75H6A2.25 2.25 0 003.75 6v12A2.25 2.25 0 006 20.25z" />
+          </svg>
+        </div>
+        <h3>Frontend Engineering</h3>
+        <p>Writing robust, highly scalable, and clean applications using the latest JavaScript ecosystems, Astro, and semantic structures.</p>
+      </div>
+      <div class="highlight-card">
+        <div class="card-icon icon-cyan">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          </svg>
+        </div>
+        <h3>Speed & SEO Optimization</h3>
+        <p>Creating lightweight, performant builds targeting perfect Core Web Vitals scores and solid search engine visibility.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="projects container">
+    <div class="section-header">
+      <span class="subtitle">Creations</span>
+      <h2>Featured Projects</h2>
+    </div>
+    <div class="projects-grid">
+      {featuredProjects.map((project) => (
+        <div class="project-card">
+          <div class="project-content">
+            <div class="project-header">
+              <span class="project-badge">{project.badge}</span>
+            </div>
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+            <div class="project-tech">
+              {project.tech.map((tech) => (
+                <span class="tech-tag">{tech}</span>
+              ))}
+            </div>
+            <a href={project.link} class="project-link">
+              View details
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Articles Section -->
+  <section id="articles" class="articles container">
+    <div class="section-header">
+      <span class="subtitle">Journal</span>
+      <h2>Latest Writing</h2>
+    </div>
+    <div class="articles-list">
+      {featuredArticles.map((article) => (
+        <article class="article-item">
+          <div class="article-meta">
+            <span class="article-tag">{article.tag}</span>
+            <span class="article-dot"></span>
+            <span class="article-date">{article.date}</span>
+          </div>
+          <div class="article-main">
+            <h3><a href="#" class="article-title">{article.title}</a></h3>
+            <p>{article.excerpt}</p>
+          </div>
+          <div class="article-footer">
+            <span class="read-time">{article.readTime}</span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero Styles */
+  .hero {
+    padding: 120px 0 80px 0;
+    text-align: center;
+  }
+
+  .hero-container {
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #22c55e;
+    box-shadow: 0 0 8px #22c55e;
+  }
+
+  .badge-text {
+    color: var(--text-primary);
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--accent-purple), var(--accent-indigo), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    max-width: 600px;
+    margin-bottom: 8px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+  }
+
+  /* Buttons in index */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-normal);
+  }
+
+  .btn-primary {
+    background: var(--accent-glow);
+    color: white;
+    border: none;
+    box-shadow: var(--shadow-glow);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 35px -2px rgba(99, 102, 241, 0.6);
+  }
+
+  .btn-secondary {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-muted);
+    transform: translateY(-2px);
+  }
+
+  /* Section Header */
+  .section-header {
+    margin-bottom: 48px;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent-indigo);
+    font-weight: 700;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  .section-header h2 {
+    font-size: 2.25rem;
+    color: var(--text-primary);
+  }
+
+  /* Highlights / Specialties */
+  .highlights {
+    padding: 80px 24px;
+  }
+
+  .highlights-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+  }
+
+  .highlight-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    transition: var(--transition-normal);
+    backdrop-filter: blur(8px);
+  }
+
+  .highlight-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 10px 30px -15px rgba(99, 102, 241, 0.2);
+  }
+
+  .card-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: white;
+  }
+
+  .icon-purple {
+    background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+  }
+
+  .icon-indigo {
+    background: linear-gradient(135deg, #818cf8, #6366f1);
+  }
+
+  .icon-cyan {
+    background: linear-gradient(135deg, #22d3ee, #06b6d4);
+  }
+
+  .card-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .highlight-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .highlight-card p {
+    font-size: 0.95rem;
+  }
+
+  /* Projects */
+  .projects {
+    padding: 80px 24px;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 32px;
+  }
+
+  .project-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition-normal);
+    backdrop-filter: blur(8px);
+    position: relative;
+  }
+
+  .project-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--accent-glow);
+    opacity: 0;
+    transition: var(--transition-normal);
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: var(--shadow-glow);
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  .project-content {
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .project-header {
+    margin-bottom: 16px;
+  }
+
+  .project-badge {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+  }
+
+  .project-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+  }
+
+  .project-card p {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+    flex-grow: 1;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+
+  .tech-tag {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    background-color: rgba(255, 255, 255, 0.03);
+    padding: 4px 8px;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .project-link svg {
+    width: 14px;
+    height: 14px;
+    transition: var(--transition-fast);
+  }
+
+  .project-card:hover .project-link svg {
+    transform: translateX(4px);
+  }
+
+  /* Articles */
+  .articles {
+    padding: 80px 24px;
+  }
+
+  .articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .article-item {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    display: grid;
+    grid-template-columns: 200px 1fr 100px;
+    align-items: center;
+    gap: 32px;
+    transition: var(--transition-normal);
+    backdrop-filter: blur(8px);
+  }
+
+  .article-item:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    background-color: rgba(24, 24, 27, 0.8);
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .article-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-cyan);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .article-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--text-muted);
+  }
+
+  .article-date {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  .article-main h3 {
+    font-size: 1.35rem;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .article-title:hover {
+    color: var(--accent-purple);
+  }
+
+  .article-footer {
+    text-align: right;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* Responsive Design */
+  @media (max-width: 900px) {
+    .article-item {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px;
+    }
+    .article-footer {
+      text-align: left;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    .hero-actions .btn {
+      width: 100%;
+    }
+  }
+</style>

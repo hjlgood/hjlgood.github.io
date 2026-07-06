@@ -1,0 +1,255 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "HJL | Personal Blog & Portfolio", 
+  description = "Welcome to my modern personal blog and project portfolio. Exploring software development, design, and tech." 
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="header">
+      <div class="container header-container">
+        <a href="/" class="logo">
+          <span class="logo-dot"></span>
+          hjlgood
+        </a>
+        <nav class="nav">
+          <a href="/" class="nav-link active">Home</a>
+          <a href="#articles" class="nav-link">Articles</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#about" class="nav-link">About</a>
+        </nav>
+        <div class="header-actions">
+          <a href="mailto:contact@hjlgood.io" class="btn btn-secondary">Get in touch</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-container">
+        <div class="footer-brand">
+          <a href="/" class="logo">
+            <span class="logo-dot"></span>
+            hjlgood
+          </a>
+          <p class="footer-tagline">Building modern web experiences and writing about tech.</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-group">
+            <h4>Sitemap</h4>
+            <a href="/">Home</a>
+            <a href="#articles">Articles</a>
+            <a href="#projects">Projects</a>
+          </div>
+          <div class="footer-group">
+            <h4>Socials</h4>
+            <a href="https://github.com/hjlgood" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+          </div>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; {new Date().getFullYear()} hjlgood. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  /* Header Styles */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: rgba(9, 9, 11, 0.8);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--transition-normal);
+  }
+
+  .header-container {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: -0.01em;
+  }
+
+  .logo-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent-glow);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-link {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    position: relative;
+    padding: 6px 0;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--text-primary);
+  }
+
+  .nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--accent-glow);
+    border-radius: 2px;
+  }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+  }
+
+  .btn-secondary {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+  }
+
+  .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-muted);
+    transform: translateY(-1px);
+  }
+
+  /* Footer Styles */
+  .footer {
+    background-color: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    padding: 64px 0 32px 0;
+    margin-top: 120px;
+  }
+
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  .footer-brand {
+    max-width: 320px;
+  }
+
+  .footer-tagline {
+    margin-top: 16px;
+    font-size: 0.95rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 64px;
+  }
+
+  .footer-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-group h4 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .footer-group a {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+
+  .footer-group a:hover {
+    color: var(--text-primary);
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(63, 63, 70, 0.2);
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  /* Mobile responsiveness */
+  @media (max-width: 768px) {
+    .nav {
+      display: none; /* simple mobile design, or could add toggle */
+    }
+    .footer-container {
+      flex-direction: column;
+      gap: 32px;
+    }
+    .footer-links {
+      gap: 32px;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+</style>
