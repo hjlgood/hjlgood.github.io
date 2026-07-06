@@ -25,7 +25,7 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/jpeg" href="/favicon-matrix.jpg" />
     <meta name="generator" content={Astro.generator} />
     
     <!-- Primary Meta Tags -->
@@ -37,6 +37,24 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet" />
+    
+    <!-- Script to prevent FOUC by setting theme early -->
+    <script is:inline>
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+      }
+    </script>
   </head>
   <body>
     <div class="newspaper-wrapper">
@@ -65,9 +83,12 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
           <span class="nav-sep">|</span>
           <a href="#articles" class="nav-link">OPINION & WRITING</a>
           <span class="nav-sep">|</span>
-          <a href="#projects" class="nav-link">SPECIAL REPORTS</a>
-          <span class="nav-sep">|</span>
           <a href="#about" class="nav-link">EDITORIAL BOARD</a>
+          <span class="nav-sep">|</span>
+          <button id="theme-toggle" class="nav-link theme-toggle-nav-btn" aria-label="Toggle Edition">
+            <span class="light-text">DARK EDITION</span>
+            <span class="dark-text">LIGHT EDITION</span>
+          </button>
         </nav>
       </header>
 
@@ -83,7 +104,6 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
               <h4>SECTIONS</h4>
               <a href="/">Front Page</a>
               <a href="#articles">Opinion & Writing</a>
-              <a href="#projects">Special Reports</a>
               <a href="#about">Editorial Board</a>
             </div>
             <div class="footer-col">
@@ -310,4 +330,46 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
       gap: 8px;
     }
   }
+
+  /* Theme Toggle Button Styles (Styled like a navigation link) */
+  .theme-toggle-nav-btn {
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    letter-spacing: inherit;
+    text-transform: inherit;
+    cursor: pointer;
+    line-height: inherit;
+    display: inline-block;
+  }
+
+  .dark-text {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .light-text {
+    display: none;
+  }
+
+  :global([data-theme="dark"]) .dark-text {
+    display: inline;
+  }
 </style>
+
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  }
+</script>
