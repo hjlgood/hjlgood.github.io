@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/BlogPostLayout.astro
 title: "2026년 하반기 주식 시장 전망 및 퀀트 백테스팅 기초"
 description: "Astro 블로그 개설 기념 첫 글. 엔비디아와 SK하이닉스 중심의 반도체 시장 분석"
 pubDate: "2026-07-06"

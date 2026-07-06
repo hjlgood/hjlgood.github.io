@@ -7,9 +7,17 @@ interface Props {
 }
 
 const { 
-  title = "HJL | Personal Blog & Portfolio", 
-  description = "Welcome to my modern personal blog and project portfolio. Exploring software development, design, and tech." 
+  title = "The Value Matrix", 
+  description = "Independent thoughts on software engineering, technology design, and quantitative finance." 
 } = Astro.props;
+
+// Format current date in newspaper style (e.g., "Monday, July 6, 2026")
+const todayFormatted = new Date().toLocaleDateString('en-US', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 ---
 
 <!DOCTYPE html>
@@ -25,231 +33,281 @@ const {
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts for Newspaper Theme -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Lora:ital,wght@0,400;0,500;0,700;1,400&family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet" />
   </head>
   <body>
-    <header class="header">
-      <div class="container header-container">
-        <a href="/" class="logo">
-          <span class="logo-dot"></span>
-          hjlgood
-        </a>
-        <nav class="nav">
-          <a href="/" class="nav-link active">Home</a>
-          <a href="#articles" class="nav-link">Articles</a>
-          <a href="#projects" class="nav-link">Projects</a>
-          <a href="#about" class="nav-link">About</a>
+    <div class="newspaper-wrapper">
+      <header class="masthead container">
+        <!-- Top Utility Row -->
+        <div class="masthead-top">
+          <span>"All the Code That's Fit to Print"</span>
+          <span>ESTABLISHED 2026</span>
+        </div>
+
+        <!-- Huge Centered Masthead Title -->
+        <div class="masthead-main">
+          <a href="/">The Value Matrix</a>
+        </div>
+
+        <!-- Double Border Metadata Bar -->
+        <div class="masthead-meta double-border-top double-border-bottom">
+          <div class="meta-item volume">VOL. I ... NO. 42</div>
+          <div class="meta-item date">{todayFormatted}</div>
+          <div class="meta-item weather">SEOUL • CLOUDY • 26°C</div>
+        </div>
+
+        <!-- Navigation Bar -->
+        <nav class="masthead-nav single-border-bottom">
+          <a href="/" class="nav-link">FRONT PAGE</a>
+          <span class="nav-sep">|</span>
+          <a href="#articles" class="nav-link">OPINION & WRITING</a>
+          <span class="nav-sep">|</span>
+          <a href="#projects" class="nav-link">SPECIAL REPORTS</a>
+          <span class="nav-sep">|</span>
+          <a href="#about" class="nav-link">EDITORIAL BOARD</a>
         </nav>
-        <div class="header-actions">
-          <a href="mailto:contact@hjlgood.io" class="btn btn-secondary">Get in touch</a>
-        </div>
-      </div>
-    </header>
+      </header>
 
-    <main>
-      <slot />
-    </main>
+      <main class="main-content">
+        <slot />
+      </main>
 
-    <footer class="footer">
-      <div class="container footer-container">
-        <div class="footer-brand">
-          <a href="/" class="logo">
-            <span class="logo-dot"></span>
-            hjlgood
-          </a>
-          <p class="footer-tagline">Building modern web experiences and writing about tech.</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-group">
-            <h4>Sitemap</h4>
-            <a href="/">Home</a>
-            <a href="#articles">Articles</a>
-            <a href="#projects">Projects</a>
+      <footer class="footer">
+        <div class="container footer-container double-border-top">
+          <div class="footer-masthead">The Value Matrix</div>
+          <div class="footer-sections">
+            <div class="footer-col">
+              <h4>SECTIONS</h4>
+              <a href="/">Front Page</a>
+              <a href="#articles">Opinion & Writing</a>
+              <a href="#projects">Special Reports</a>
+              <a href="#about">Editorial Board</a>
+            </div>
+            <div class="footer-col">
+              <h4>CORRESPONDENTS</h4>
+              <a href="https://github.com/hjlgood" target="_blank" rel="noopener noreferrer">GitHub</a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+            </div>
+            <div class="footer-col subscription-col">
+              <h4>SUBSCRIPTIONS</h4>
+              <p>Sign up to receive our weekly dispatch on software architectures, design philosophy, and finance.</p>
+              <a href="mailto:contact@hjlgood.io" class="subscribe-btn">WRITE AN EDITORIAL</a>
+            </div>
           </div>
-          <div class="footer-group">
-            <h4>Socials</h4>
-            <a href="https://github.com/hjlgood" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">Twitter</a>
+          <div class="footer-bottom single-border-top">
+            <p>&copy; {new Date().getFullYear()} The Value Matrix. Published daily. All rights reserved.</p>
           </div>
         </div>
-      </div>
-      <div class="container footer-bottom">
-        <p>&copy; {new Date().getFullYear()} hjlgood. All rights reserved.</p>
-      </div>
-    </footer>
+      </footer>
+    </div>
   </body>
 </html>
 
 <style>
-  /* Header Styles */
-  .header {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background-color: rgba(9, 9, 11, 0.8);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--transition-normal);
+  .newspaper-wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 0;
   }
 
-  .header-container {
-    height: 72px;
+  /* Masthead Styles */
+  .masthead {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
+  .masthead-top {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    letter-spacing: 0.05em;
+    padding-bottom: 8px;
+    text-transform: uppercase;
   }
 
-  .logo {
-    font-size: 1.25rem;
-    font-weight: 700;
+  .masthead-main {
+    padding: 16px 0;
+  }
+
+  .masthead-main a {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 7vw, 4.8rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
     color: var(--text-primary);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    letter-spacing: -0.01em;
+    line-height: 0.95;
+    display: inline-block;
   }
 
-  .logo-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent-glow);
+  .masthead-meta {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 8px 0;
+    margin-bottom: 12px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
   }
 
-  .nav {
+  .volume {
+    text-align: left;
+  }
+
+  .date {
+    text-align: center;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .weather {
+    text-align: right;
+  }
+
+  .masthead-nav {
     display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-bottom: 12px;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
   }
 
   .nav-link {
-    font-size: 0.95rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    position: relative;
-    padding: 6px 0;
-  }
-
-  .nav-link:hover, .nav-link.active {
     color: var(--text-primary);
+    padding: 4px 8px;
   }
 
-  .nav-link.active::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: var(--accent-glow);
-    border-radius: 2px;
+  .nav-link:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+    text-underline-offset: 4px;
   }
 
-  /* Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px;
-    border-radius: var(--radius-md);
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition-fast);
+  .nav-sep {
+    color: var(--border-light);
+    font-weight: 300;
   }
 
-  .btn-secondary {
-    background-color: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
-  }
-
-  .btn-secondary:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    border-color: var(--text-muted);
-    transform: translateY(-1px);
+  /* Main Content Area */
+  .main-content {
+    margin-top: 16px;
   }
 
   /* Footer Styles */
   .footer {
-    background-color: var(--bg-secondary);
-    border-top: 1px solid var(--border-color);
-    padding: 64px 0 32px 0;
-    margin-top: 120px;
+    margin-top: 64px;
+    padding-top: 32px;
   }
 
-  .footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  .footer-masthead {
+    font-family: var(--font-serif);
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    text-align: center;
+    margin-bottom: 32px;
+    padding-top: 24px;
+  }
+
+  .footer-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 40px;
-    margin-bottom: 48px;
+    padding-bottom: 40px;
   }
 
-  .footer-brand {
-    max-width: 320px;
+  .footer-col h4 {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
   }
 
-  .footer-tagline {
-    margin-top: 16px;
-    font-size: 0.95rem;
-  }
-
-  .footer-links {
-    display: flex;
-    gap: 64px;
-  }
-
-  .footer-group {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .footer-group h4 {
+  .footer-col a {
+    display: block;
+    font-family: var(--font-sans);
     font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
-
-  .footer-group a {
-    font-size: 0.9rem;
+    font-weight: 500;
     color: var(--text-secondary);
+    margin-bottom: 10px;
   }
 
-  .footer-group a:hover {
-    color: var(--text-primary);
+  .footer-col a:hover {
+    color: var(--accent-color);
+    text-decoration: underline;
+  }
+
+  .subscription-col p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .subscribe-btn {
+    display: inline-block;
+    border: 1px solid var(--border-color);
+    padding: 8px 16px;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    background-color: var(--text-primary);
+    color: var(--bg-primary) !important;
+    text-transform: uppercase;
+    transition: var(--transition-fast);
+  }
+
+  .subscribe-btn:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: var(--bg-primary) !important;
+    text-decoration: none !important;
   }
 
   .footer-bottom {
-    border-top: 1px solid rgba(63, 63, 70, 0.2);
-    padding-top: 24px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.85rem;
+    padding: 24px 0;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
     color: var(--text-muted);
+    text-align: center;
   }
 
-  /* Mobile responsiveness */
   @media (max-width: 768px) {
-    .nav {
-      display: none; /* simple mobile design, or could add toggle */
+    .masthead-meta {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      text-align: center;
     }
-    .footer-container {
+    .volume, .weather {
+      text-align: center;
+    }
+    .nav-sep {
+      display: none;
+    }
+    .masthead-nav {
       flex-direction: column;
-      gap: 32px;
-    }
-    .footer-links {
-      gap: 32px;
-      justify-content: space-between;
-      width: 100%;
+      gap: 8px;
     }
   }
 </style>

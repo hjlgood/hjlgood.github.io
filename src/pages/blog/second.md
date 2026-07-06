@@ -1,0 +1,16 @@
+---
+layout: ../../layouts/BlogPostLayout.astro
+title: "TEST2"
+description: "Astro 블로그 개설 기념 첫 글. 엔비디아와 SK하이닉스 중심의 반도체 시장 분석"
+pubDate: "2026-07-06"
+heroImage: "/blog-placeholder-1.jpg" # 템플릿에 내장된 기본 이미지 경로
+---
+
+# 드디어 첫 블로그 포스팅!
+
+여기에 쓰고 싶은 주식 분석 글을 자유롭게 작성하시면 됩니다. 
+Astro는 가볍고 빨라서 구글 SEO 점수를 높게 받기 유리합니다.
+
+## 오늘자 반도체 시장 한 줄 요약
+* **HBM 가격 추이:** 상승세 지속 전망
+* **나의 대응 전략:** 5분 봉 캔들 데이터 기반 분할 매수
