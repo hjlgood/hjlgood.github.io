@@ -1,11 +1,29 @@
 ---
 import Layout from './Layout.astro';
+import { SITE_TITLE } from '../config';
 
 const { frontmatter } = Astro.props;
-const { title, description, pubDate, heroImage } = frontmatter;
+const { title, description, pubDate, heroImage, tags, author, authorRole } = frontmatter;
+
+const displayAuthor = author || "JL Hwang";
+const displayAuthorRole = authorRole || `Special to ${SITE_TITLE}`;
+
+// Normalize tags to an array
+let tagList = [];
+if (tags) {
+  if (Array.isArray(tags)) {
+    tagList = tags;
+  } else if (typeof tags === 'string') {
+    if (tags.includes(',')) {
+      tagList = tags.split(',').map(t => t.trim());
+    } else {
+      tagList = [tags.trim()];
+    }
+  }
+}
 ---
 
-<Layout title={`${title} | The Hidden Tickers`} description={description}>
+<Layout title={`${title} | ${SITE_TITLE}`} description={description}>
   <article class="blog-post-container container fade-in">
     <header class="post-header">
       <div class="post-kicker">EDITORIAL OPINION</div>
@@ -15,9 +33,9 @@ const { title, description, pubDate, heroImage } = frontmatter;
       <!-- Editorial Byline / Dateline bar -->
       <div class="post-byline-bar single-border-top single-border-bottom">
         <div class="byline-left">
-          <span>By <strong>JL Hwang</strong></span>
+          <span>By <strong>{displayAuthor}</strong></span>
           <span class="byline-separator">•</span>
-          <span>Special to The Hidden Tickers</span>
+          <span>{displayAuthorRole}</span>
         </div>
         <div class="byline-right">
           <time datetime={pubDate}>
@@ -45,6 +63,18 @@ const { title, description, pubDate, heroImage } = frontmatter;
     <div class="post-body dropcap-post">
       <slot />
     </div>
+
+    {tagList.length > 0 && (
+      <div class="post-tags-container single-border-top">
+        <span class="tags-label">Filed Under:</span>
+        <div class="post-tags">
+          {tagList.map(tag => {
+            const displayTag = tag.startsWith('#') ? tag : `#${tag}`;
+            return <span class="post-tag">{displayTag}</span>;
+          })}
+        </div>
+      </div>
+    )}
   </article>
 </Layout>
 
@@ -231,11 +261,103 @@ const { title, description, pubDate, heroImage } = frontmatter;
     color: var(--text-primary);
   }
 
+  /* Editorial Table Styles */
+  .post-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 32px 0;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    border-top: 2px solid var(--border-color);
+    border-bottom: 2px solid var(--border-color);
+  }
+
+  .post-body th {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    color: var(--text-primary);
+    border-bottom: 1px solid var(--border-color);
+    padding: 12px 10px;
+    background-color: var(--bg-secondary);
+    text-align: center;
+  }
+
+  .post-body td {
+    padding: 12px 10px;
+    border-bottom: 1px dashed var(--border-light);
+    color: var(--text-secondary);
+    vertical-align: middle;
+    text-align: center;
+  }
+
+  .post-body tr:last-child td {
+    border-bottom: none;
+  }
+
+  .post-body tr:hover td {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+  }
+
+  @media (max-width: 768px) {
+    .post-body table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
   @media (max-width: 576px) {
     .post-byline-bar {
       flex-direction: column;
       align-items: flex-start;
       gap: 8px;
     }
+  }
+
+  .post-tags-container {
+    margin-top: 48px;
+    padding-top: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sans);
+  }
+
+  .tags-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .post-tag {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    padding: 2px 8px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-secondary);
+    transition: var(--transition-fast);
+  }
+
+  .post-tag:hover {
+    border-color: var(--accent-color);
+    background-color: var(--bg-primary);
   }
 </style>

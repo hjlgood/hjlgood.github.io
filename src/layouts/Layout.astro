@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../config';
 
 interface Props {
   title?: string;
@@ -7,8 +8,8 @@ interface Props {
 }
 
 const { 
-  title = "The Value Matrix", 
-  description = "Independent thoughts on software engineering, technology design, and quantitative finance." 
+  title = SITE_TITLE, 
+  description = SITE_DESCRIPTION 
 } = Astro.props;
 
 // Format current date in newspaper style (e.g., "Monday, July 6, 2026")
@@ -67,7 +68,7 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
 
         <!-- Huge Centered Masthead Title -->
         <div class="masthead-main">
-          <a href="/">The Value Matrix</a>
+          <a href="/">{SITE_TITLE}</a>
         </div>
 
         <!-- Double Border Metadata Bar -->
@@ -81,9 +82,9 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
         <nav class="masthead-nav single-border-bottom">
           <a href="/" class="nav-link">FRONT PAGE</a>
           <span class="nav-sep">|</span>
-          <a href="#articles" class="nav-link">OPINION & WRITING</a>
+          <a href="/#articles" class="nav-link">OPINION & WRITING</a>
           <span class="nav-sep">|</span>
-          <a href="#about" class="nav-link">EDITORIAL BOARD</a>
+          <a href="/#about" class="nav-link">EDITORIAL BOARD</a>
           <span class="nav-sep">|</span>
           <button id="theme-toggle" class="nav-link theme-toggle-nav-btn" aria-label="Toggle Edition">
             <span class="light-text">DARK EDITION</span>
@@ -98,13 +99,13 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
 
       <footer class="footer">
         <div class="container footer-container double-border-top">
-          <div class="footer-masthead">The Value Matrix</div>
+          <div class="footer-masthead">{SITE_TITLE}</div>
           <div class="footer-sections">
             <div class="footer-col">
               <h4>SECTIONS</h4>
               <a href="/">Front Page</a>
-              <a href="#articles">Opinion & Writing</a>
-              <a href="#about">Editorial Board</a>
+              <a href="/#articles">Opinion & Writing</a>
+              <a href="/#about">Editorial Board</a>
             </div>
             <div class="footer-col">
               <h4>CORRESPONDENTS</h4>
@@ -119,7 +120,7 @@ const todayFormatted = new Date().toLocaleDateString('en-US', {
             </div>
           </div>
           <div class="footer-bottom single-border-top">
-            <p>&copy; {new Date().getFullYear()} The Value Matrix. Published daily. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} {SITE_TITLE}. Published daily. All rights reserved.</p>
           </div>
         </div>
       </footer>

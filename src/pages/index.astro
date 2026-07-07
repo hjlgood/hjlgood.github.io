@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { SITE_TITLE } from '../config';
 import { Content as EditorDeskContent, frontmatter as editorFrontmatter } from '../content/editor-desk.md';
 import { Content as BoardMissionContent, frontmatter as boardFrontmatter } from '../content/board-mission.md';
 
@@ -161,7 +162,9 @@ const opinionPosts = sortedPosts.length > 1 ? sortedPosts.slice(1) : [];
       </div>
       <div class="board-content">
         <div class="board-statement">
-          <BoardMissionContent />
+          <p>
+            <strong>{SITE_TITLE}</strong> is committed to delivering clean, performant, and visual-first code journalism. Our editorial staff covers design tokens, serverless database adapters, and reactive CSS styling. Every block of code is audited for speed and accessibility prior to release.
+          </p>
         </div>
         <div class="board-members">
           {boardFrontmatter.members && boardFrontmatter.members.map((member: BoardMember) => (
